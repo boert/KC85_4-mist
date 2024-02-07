@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.118 (w)1999-2023 BSI
-[*] Wed Feb  7 20:22:43 2024
+[*] Wed Feb  7 21:18:32 2024
 [*]
 [dumpfile] "/home/bert/Sync/Projekte/Retrocomputing/Mist_KC85/git_repo/KC85_4-mist/simulation_ghdl/wave.vcd"
-[dumpfile_mtime] "Wed Feb  7 20:22:09 2024"
-[dumpfile_size] 84235643
+[dumpfile_mtime] "Wed Feb  7 21:12:55 2024"
+[dumpfile_size] 103278439
 [savefile] "/home/bert/Sync/Projekte/Retrocomputing/Mist_KC85/git_repo/KC85_4-mist/simulation_ghdl/wave_top_kc85_4_tb.gtkw"
 [timestart] 0
 [size] 1600 822
 [pos] -1 -1
-*-42.429905 67100937456 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-30.582657 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] top_kc85_4_tb.
 [treeopen] top_kc85_4_tb.dut.
 [sst_width] 209
@@ -28,11 +28,22 @@ top_kc85_4_tb.dut.v[7:0]
 top_kc85_4_tb.dut.rbu_n
 @200
 -video timing
-@29
-top_kc85_4_tb.dut.hzr
 @28
+top_kc85_4_tb.dut.hzr
 top_kc85_4_tb.dut.vzr
 top_kc85_4_tb.dut.hsy1
 top_kc85_4_tb.dut.vsy1
+top_kc85_4_tb.dut.bi_n
+top_kc85_4_tb.dut.zi_n
+@200
+-video RAM control
+@28
+top_kc85_4_tb.dut.ras_n
+@29
+top_kc85_4_tb.dut.cas_n
+@28
+top_kc85_4_tb.dut.duf
+top_kc85_4_tb.dut.dup
+top_kc85_4_tb.dut.duz
 [pattern_trace] 1
 [pattern_trace] 0

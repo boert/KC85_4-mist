@@ -124,6 +124,47 @@ architecture rtl of kc85_4 is
     signal  d3434b_q    : std_logic;
     signal  vsy1        : std_logic;
     --
+    signal  s2          : std_logic;
+    signal  d3435b_q    : std_logic;
+    signal  duf         : std_logic;
+    signal  d3435a_q    : std_logic;
+    signal  ras_n       : std_logic;
+    signal  dup         : std_logic;
+    signal  sig440      : std_logic;
+    signal  d3436b_q    : std_logic;
+    signal  d3435c_q    : std_logic;
+    signal  duz         : std_logic;
+    signal  d3407a_q_n  : std_logic;
+    signal  cas_n       : std_logic;
+    signal  d3429a_q    : std_logic;
+    signal  s1_n        : std_logic;
+    signal  d3440b_q    : std_logic;
+    signal  ire_n       : std_logic;
+    signal  mreq        : std_logic;
+    signal  d3437a_q    : std_logic;
+    signal  d3439c_q    : std_logic;
+    signal  d3430c_q    : std_logic;
+    signal  d3441d_q    : std_logic;
+    signal  write_n     : std_logic;
+    signal  d3439f_q    : std_logic;
+    signal  oed_n       : std_logic;
+    signal  d3431b_q    : std_logic;
+    signal  d3431d_q    : std_logic;
+    signal  d3432e_q    : std_logic;
+    signal  d3434d_q    : std_logic;
+    signal  syn_n       : std_logic;
+    signal  d3408a_q    : std_logic;
+    signal  d3433a_q    : std_logic;
+    signal  d3437d_q    : std_logic;
+    signal  zi_n        : std_logic;
+    signal  inf         : std_logic;
+    signal  inf_n       : std_logic;
+    signal  bla0_big    : std_logic;
+    signal  bla0        : std_logic;
+    signal  block0      : std_logic;
+    signal  bla1_big    : std_logic;
+    signal  bla1        : std_logic;
+    --
     signal  afe         : std_logic;
     signal  meo         : std_logic;
     signal  mac_n       : std_logic;
@@ -394,5 +435,93 @@ begin
     pm                  <=     m;
     -- Ende Spalte 1
 
+    -- Anfang Spalte 2
+    D3429C: S2          <= pm( 2) and pm( 3);
+    D3435C: d3435c_q    <= not( pm_n( 2) and pm_n( 3) and pm_n( 1));
+    D3438F: duf         <= not d3435c_q;
+    D3435B: d3435b_q    <= not( pm( 2) and m( 1) and pm_n( 3));
+    D3436A: ras_n       <= not( d3435c_q and d3435b_q);
+    D3438E: dup         <= not d3435b_q;
+    D3436B: d3436b_q    <= not( d3435c_q and d3435b_q); -- wie /ras 
+    D3439B: sig440      <= not( not( d3436b_q));        -- /ras um einge ns verzögert
+    D3435A: d3435a_q    <= not( pm( 3) and pm( 2) and pm_n( 1));
+    D3438D: duz         <= not d3435a_q;
+
+    D3407A: dl074d
+    port map
+    (
+        s_n     => '1',         --: in  std_ulogic;
+        clk     => m( 0),       --: in  std_ulogic;
+        d       => d3436b_q,    --: in  std_ulogic;
+        r_n     => '1',         --: in  std_ulogic;
+        --
+        q       => open,        --: out std_ulogic;
+        q_n     => d3407a_q_n   --: out std_ulogic
+    );
+
+    D3436D: cas_n       <= not( d3435a_q and d3407a_q_n);
+    D3429A: d3429a_q    <= pm_n( 3) and pm_n( 2);
+
+    D3407B: dl074d
+    port map
+    (
+        s_n     => '1',         --: in  std_ulogic;
+        clk     => m( 0),       --: in  std_ulogic;
+        d       => d3429a_q,    --: in  std_ulogic;
+        r_n     => '1',         --: in  std_ulogic;
+        --
+        q       => open,        --: out std_ulogic;
+        q_n     => s1_n         --: out std_ulogic
+    );
+
+    D3440B: d3440b_q    <= not ire_n;
+    D3437A: d3437a_q    <= not( mreq and d3440b_q);
+    D3439C: d3439c_q    <= not d3437a_q;
+    D3073C: wait_n      <= '0' when s1_n and d3439c_q else 'Z'; -- OC
+    D3430C: d3430c_q    <= pm_n( 3) and d3441d_q;
+    D3441D: d3441d_q    <= not wr_n;
+    D3437C: write_n     <= not( d3439c_q and d3441d_q);
+    D3439F: d3439f_q    <= not rd_n;
+    D3437B: oed_n       <= not( d3439c_q and d3439f_q);
+
+    D3434D: d3434d_q    <= not( vsy1 and d3431b_q);
+    D3431B: d3431b_q    <= not( v( 4) and v( 2) and bi_n);
+    D3432E: d3432e_q    <= not d3431d_q;
+    D3428D: syn_n       <= d3432e_q and d3408a_q;
+
+    D3408A: dl074d
+    port map
+    (
+        s_n     => h( 5),       --: in  std_ulogic;
+        clk     => h( 0),       --: in  std_ulogic;
+        d       => hsy1,        --: in  std_ulogic;
+        r_n     => '1',         --: in  std_ulogic;
+        --
+        q       => d3408a_q,    --: out std_ulogic;
+        q_n     => open         --: out std_ulogic
+    );
+
+    D3433A: d3433a_q    <= not( h4_n and h( 5) and h3_n);
+    D3437D: d3437d_q    <= not( d3433a_q and h( 5));
+
+    D3408B: dl074d
+    port map
+    (
+        s_n     => '1',         --: in  std_ulogic;
+        clk     => d3437d_q,    --: in  std_ulogic;
+        d       => h( 0),       --: in  std_ulogic;
+        r_n     => '1',         --: in  std_ulogic;
+        --
+        q       => open,        --: out std_ulogic;
+        q_n     => zi_n         --: out std_ulogic
+    );
+
+    D3434C: inf         <= not( bi_n or zi_n);
+    D3439E: inf_n       <= not inf;
+    D3430A: bla0        <= bla0_big and block0;
+    D3430B: bla1        <= bla1_big and block0;
+
+
+    -- Ende Spalte 2
 
 end architecture rtl;

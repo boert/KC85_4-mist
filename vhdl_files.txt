@@ -8,6 +8,7 @@ ttl_lib contrib/ttl_lib/dl008d.vhd
 ttl_lib contrib/ttl_lib/dl074d.vhd
 ttl_lib contrib/ttl_lib/dl090d.vhd
 ttl_lib contrib/ttl_lib/dl093d.vhd
+ttl_lib contrib/ttl_lib/dl193d.vhd
 #
 # Z80
 T80 contrib/T80/T80_Pack.vhd

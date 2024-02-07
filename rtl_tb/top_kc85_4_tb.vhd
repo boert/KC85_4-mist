@@ -37,6 +37,7 @@ begin
     port map
     (
         reset_button_n  => tb_reset_button_n,   --: in    std_logic;
+        vcot            => tb_vcot,             --: in    std_logic;
         --
         led             => tb_led               --: out   std_logic
     );
@@ -44,7 +45,16 @@ begin
 
     process
     begin
-        wait for 20 ms;
+        report "Simulation start.";
+        wait for 10 ms;
+        report "20% done.";
+        wait for 10 ms;
+        report "40% done.";
+        wait for 10 ms;
+        report "60% done.";
+        wait for 10 ms;
+        report "80% done.";
+        wait for 10 ms;
         report "Simulation end.";
         simulation_run  <= false;
         wait;   -- forever

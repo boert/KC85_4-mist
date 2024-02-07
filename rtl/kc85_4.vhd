@@ -52,10 +52,17 @@ use ieee.numeric_std.all;
 
 library T80;
 
+library TTL_LIB;
+use TTL_LIB.component_package.dl074d;
+use TTL_LIB.component_package.dl093d;
+use TTL_LIB.component_package.dl193d;
+
+
 entity kc85_4 is
     port
     (
         reset_button_n  : in    std_logic;
+        vcot            : in    std_logic;
         --
         led             : out   std_logic
     );
@@ -88,8 +95,34 @@ architecture rtl of kc85_4 is
     signal  busak_n     : std_logic;
     --
     signal  takt1       : std_logic;
-    signal  pm2         : std_logic;
     signal  reset       : std_logic;
+    signal  vcot_n      : std_logic;
+    signal  hzr         : std_logic;
+    signal  m           : std_ulogic_vector( 3 downto 0);
+    signal  d3401_uv_n  : std_logic;
+    signal  d3402_uv_n  : std_logic;
+    signal  h           : std_ulogic_vector( 5 downto 0);
+    signal  h3_n        : std_logic;
+    signal  h4_n        : std_logic;
+    signal  h5_n        : std_logic;
+    signal  blink_big   : std_logic;
+    signal  blink       : std_logic;
+    signal  d3404_q     : std_ulogic_vector( 3 downto 0);
+    signal  v           : std_ulogic_vector( 7 downto 0);
+    signal  vzr         : std_logic;
+    signal  d3405_q     : std_ulogic_vector( 3 downto 0);
+    signal  d3406_q     : std_ulogic_vector( 3 downto 0);
+    signal  bi_n        : std_logic;
+    signal  d3428a_q    : std_logic;
+    signal  d3207a_q    : std_logic;
+    signal  d3207b_q    : std_logic;
+    signal  pm          : std_ulogic_vector( 3 downto 0);
+    signal  pm_n        : std_ulogic_vector( 3 downto 0);
+    signal  rbu_n       : std_logic;
+    signal  hsy1        : std_logic;
+    signal  d3434a_q    : std_logic;
+    signal  d3434b_q    : std_logic;
+    signal  vsy1        : std_logic;
     --
     signal  afe         : std_logic;
     signal  meo         : std_logic;
@@ -147,8 +180,8 @@ begin
 
     ----------------------------------------
     -- function block: Takttreiber D3010
-    takt    <= not pm2;
-    takt1   <= not pm2;
+    takt    <= not pm( 2);
+    takt1   <= not pm( 2);
 
     ----------------------------------------
     -- function block: Resetlogik
@@ -236,5 +269,130 @@ begin
     -- D3013D, entfaellt
 
     ab65                <= not ( ab_small( 5) or ab_small( 6)); 
+    
+    ----------------------------------------
+    --  video timing generator
+    
+    -- Anfang Spalte 1
+    D3432: vcot_n  <= not vcot;
+
+    D3401: dl193d
+    port map
+    (
+        zv      => vcot_n,      --: in  std_ulogic;
+        zr      => '1',         --: in  std_ulogic;
+        --      
+        d       => "1111",      --: in  std_ulogic_vector(3 downto 0);
+        --      
+        s_n     => '1',         --: in  std_ulogic;
+        r       => hzr,         --: in  std_ulogic;
+        --      
+        q       => m,           --: out std_ulogic_vector(3 downto 0)
+        cv      => d3401_uv_n,  --: out std_ulogic;
+        cr      => open         --: out std_ulogic;
+    );
+
+    D3402: dl193d
+    port map
+    (
+        zv      => d3401_uv_n,  --: in  std_ulogic;
+        zr      => '1',         --: in  std_ulogic;
+        --      
+        d       => "1111",      --: in  std_ulogic_vector(3 downto 0);
+        --      
+        s_n     => '1',         --: in  std_ulogic;
+        r       => hzr,         --: in  std_ulogic;
+        --      
+        q       => h( 3 downto 0),  --: out std_ulogic_vector(3 downto 0)
+        cv      => d3402_uv_n,  --: out std_ulogic;
+        cr      => open         --: out std_ulogic;
+    );
+
+
+    D3403A: dl074d
+    port map
+    (
+        s_n     => '1',         --: in  std_ulogic;
+        clk     => d3402_uv_n,  --: in  std_ulogic;
+        d       => h4_n,        --: in  std_ulogic;
+        r_n     => not hzr,     --: in  std_ulogic;
+        --
+        q       => h( 4),       --: out std_ulogic;
+        q_n     => h4_n         --: out std_ulogic
+    );
+
+
+    D3403B: dl074d
+    port map
+    (
+        s_n     => '1',         --: in  std_ulogic;
+        clk     => h4_n,        --: in  std_ulogic;
+        d       => h5_n,        --: in  std_ulogic;
+        r_n     => not hzr,     --: in  std_ulogic;
+        --
+        q       => h( 5),       --: out std_ulogic;
+        q_n     => h5_n         --: out std_ulogic
+    );
+
+    D3404: dl093d
+    port map
+    (
+        cka     => blink_big,   --: in  std_ulogic;
+        ckb     => h( 5),       --: in  std_ulogic;
+        r01     => '0',         --: in  std_ulogic;
+        r02     => '0',         --: in  std_ulogic;
+        --
+        q       => d3404_q      --: out std_ulogic_vector(3 downto 0)
+    );
+    blink   <= d3404_q( 0);
+    v( 0)   <= d3404_q( 1);
+    v( 1)   <= d3404_q( 2);
+    
+    D3405: dl093d
+    port map
+    (
+        cka     => v( 1),       --: in  std_ulogic;
+        ckb     => v( 2),       --: in  std_ulogic;
+        r01     => vzr,         --: in  std_ulogic;
+        r02     => vzr,         --: in  std_ulogic;
+        --
+        q       => d3405_q      --: out std_ulogic_vector(3 downto 0)
+    );
+    v( 2)   <= d3405_q( 0);
+    v( 3)   <= d3405_q( 1);
+    v( 4)   <= d3405_q( 2);
+    v( 5)   <= d3405_q( 3);
+    
+    D3406: dl093d
+    port map
+    (
+        cka     => '0',         --: in  std_ulogic;
+        ckb     => v( 5),       --: in  std_ulogic;
+        r01     => vzr,         --: in  std_ulogic;
+        r02     => vzr,         --: in  std_ulogic;
+        --
+        q       => d3406_q      --: out std_ulogic_vector(3 downto 0)
+    );
+    v( 6)   <= d3406_q( 1);
+    v( 7)   <= d3406_q( 2);
+    bi_n    <= d3406_q( 3);
+
+    D3428A: d3428a_q    <= pm( 3) and m( 1);
+    D3207A: d3207a_q    <= h( 5) and h( 4) and h( 3);
+    D3428B: hzr         <= d3428a_q and d3207a_q;
+
+    D3431A: vzr         <= bi_n and v( 4) and v( 3) and v( 5);
+
+    D3432C: h3_n        <= not h( 3);
+    D3207B: d3207b_q    <= h( 1) and h( 4) and h( 5);
+    D3433C: rbu_n       <= not( h3_n and not h( 2) and d3207b_q);
+    D3433B: hsy1        <= not( h4_n and h( 3) and h( 2));
+    D3434B: d3434b_q    <= not( v( 6) and v( 7));
+    D3434A: d3434a_q    <= not( v( 3) and v( 5));
+    D3436C: vsy1        <= not( d3434b_q and d3434a_q);
+    pm_n                <= not m;
+    pm                  <=     m;
+    -- Ende Spalte 1
+
 
 end architecture rtl;

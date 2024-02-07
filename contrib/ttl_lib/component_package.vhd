@@ -182,14 +182,14 @@ package component_package is
 
 
     component dl093d is
-        port (
-            cka : in  std_ulogic;
-            ckb : in  std_ulogic;
-            r01 : in  std_ulogic;
-            r02 : in  std_ulogic;
-            --
-            q   : out std_ulogic_vector(3 downto 0)
-        );
+    port (
+        cka : in  std_ulogic;
+        ckb : in  std_ulogic;
+        r01 : in  std_ulogic;
+        r02 : in  std_ulogic;
+        --
+        q   : out std_ulogic_vector(3 downto 0)
+    );
     end component dl093d;
 
 
@@ -202,17 +202,18 @@ package component_package is
 
 
     component dl193d is
-        port (
-            d  : in  std_ulogic_vector(3 downto 0);
-            zv : in  std_ulogic;
-            zr : in  std_ulogic;
-            s  : in  std_ulogic;
-            r  : in  std_ulogic;
-            --
-            q  : out std_logic_vector(3 downto 0);
-            cv : out std_ulogic;
-            cr : out std_ulogic
-        );
+    port 
+    (
+        d   : in  std_ulogic_vector(3 downto 0);
+        zv  : in  std_ulogic;
+        zr  : in  std_ulogic;
+        s_n : in  std_ulogic;
+        r   : in  std_ulogic;
+        -- 
+        q   : out std_logic_vector(3 downto 0);
+        cv  : out std_ulogic;
+        cr  : out std_ulogic
+    );
     end component dl193d;
 
 

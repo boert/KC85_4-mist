@@ -1,15 +1,15 @@
 [*]
-[*] GTKWave Analyzer v3.3.117 (w)1999-2023 BSI
-[*] Sun Feb  4 20:38:35 2024
+[*] GTKWave Analyzer v3.3.118 (w)1999-2023 BSI
+[*] Sun Feb  4 23:16:37 2024
 [*]
 [dumpfile] "/home/bert/Sync/Projekte/Retrocomputing/Mist_KC85/git_repo/KC85_4-mist/simulation_ghdl/wave.vcd"
-[dumpfile_mtime] "Sun Feb  4 20:37:56 2024"
-[dumpfile_size] 175288917
+[dumpfile_mtime] "Sun Feb  4 23:16:10 2024"
+[dumpfile_size] 152907878
 [savefile] "/home/bert/Sync/Projekte/Retrocomputing/Mist_KC85/git_repo/KC85_4-mist/simulation_ghdl/wave_taktgeber_tb.gtkw"
 [timestart] 0
 [size] 1600 822
 [pos] -1 -1
-*-43.010021 45140887038375 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-43.010021 14390565092208 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [sst_width] 209
 [signals_width] 231
 [sst_expanded] 1
@@ -23,14 +23,12 @@ taktgeber_tb.dut.vco_frequency
 -
 @200
 -
-@29
-taktgeber_tb.dut.vcot
 @28
+taktgeber_tb.dut.vcot
 taktgeber_tb.dut.xl6
 taktgeber_tb.dut.xl4
 taktgeber_tb.dut.xl5
 taktgeber_tb.dut.d411_1q
-taktgeber_tb.dut.d411_1q_n
 taktgeber_tb.dut.d411_2q
 taktgeber_tb.dut.d408_3q
 [pattern_trace] 1

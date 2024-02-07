@@ -35,7 +35,7 @@ begin
         end if;
     end process;
     
-    q   <= ff;
-    q_n <= not ff;
+    q   <= transport     ff after 25 ns;
+    q_n <= transport not ff after 25 ns;
 
 end architecture rtl;

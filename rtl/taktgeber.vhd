@@ -108,21 +108,17 @@ begin
 
     vco_sim: process
         constant vco_step       : integer    := 1;
-        constant div            : integer    := 80000;
-        variable d411_1q_old    : std_logic;
-        variable d411_2q_old    : std_logic;
+        constant div            : integer    := 1000;
     begin
-        wait for xtal_period / 11;
-        if d411_2q = '1' and d411_2q_old = '0' then
+        wait for xtal_period;
+        if d411_2q = '1' then
             vco_frequency   <= vco_frequency + (vco_max_freq - vco_frequency) / div;
             -- report "faster" & integer'image( (vco_max_freq - vco_frequency) / div);
         end if;
-        if d411_1q = '1' and d411_1q_old = '0' then
+        if d411_1q = '1' then
             vco_frequency   <= vco_frequency - (vco_frequency - vco_min_freq) / div;
             -- report "slower " & integer'image( (vco_frequency - vco_min_freq) / div);
         end if;
-        d411_1q_old := d411_1q;
-        d411_2q_old := d411_2q;
         --report integer'image( vco_frequency);
     end process;
 

@@ -4,8 +4,9 @@ FILE_LIST_WORK=$(shell grep --invert '^\s*$\|^#\|^\s*#' ../vhdl_files.txt | grep
 FILE_LIST_T80=$(shell grep --invert '^\s*$\|^#\|^\s*#' ../vhdl_files.txt | grep ^T80 | cut -f 2 -d" " | awk '{printf "../%s\n",$$1,$$2}')
 FILE_LIST_TTLLIB=$(shell grep --invert '^\s*$\|^#\|^\s*#' ../vhdl_files.txt | grep ^ttl_lib | cut -f 2 -d" " | awk '{printf "../%s\n",$$1,$$2}')
 
-TOP_TB = top_mist_tb
 TOP_TB = taktgeber_tb
+TOP_TB = top_mist_tb
+TOP_TB = top_kc85_4_tb
 
 # ghdl options
 OPTS = --std=08

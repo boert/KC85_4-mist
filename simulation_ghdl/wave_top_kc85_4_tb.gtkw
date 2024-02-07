@@ -1,0 +1,24 @@
+[*]
+[*] GTKWave Analyzer v3.3.118 (w)1999-2023 BSI
+[*] Wed Feb  7 18:44:59 2024
+[*]
+[dumpfile] "/home/bert/Sync/Projekte/Retrocomputing/Mist_KC85/git_repo/KC85_4-mist/simulation_ghdl/wave.vcd"
+[dumpfile_mtime] "Wed Feb  7 18:44:55 2024"
+[dumpfile_size] 17012188
+[savefile] "/home/bert/Sync/Projekte/Retrocomputing/Mist_KC85/git_repo/KC85_4-mist/simulation_ghdl/wave_top_kc85_4_tb.gtkw"
+[timestart] 4439340200000
+[size] 1600 822
+[pos] -1 -1
+*-23.493065 4439410709241 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] top_kc85_4_tb.
+[sst_width] 209
+[signals_width] 166
+[sst_expanded] 1
+[sst_vpaned_height] 234
+@28
+top_kc85_4_tb.tb_pal_clock
+top_kc85_4_tb.tb_vcot
+@29
+top_kc85_4_tb.tb_reset_button_n
+[pattern_trace] 1
+[pattern_trace] 0

@@ -15,8 +15,10 @@ T80 contrib/T80/T80s.vhd
 #
 # main stuff
 work rtl/taktgeber.vhd
-work rtl/top_mist.vhd
-work rtl/kc85_4_box.vhd
+work rtl/kc85_4.vhd
+#work cores/altpll0.vhd
+#work rtl/top_mist.vhd
 #
 # testbenches
 work rtl_tb/taktgeber_tb.vhd
+work rtl_tb/top_kc85_4_tb.vhd

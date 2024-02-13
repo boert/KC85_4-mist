@@ -56,6 +56,8 @@ library TTL_LIB;
 use TTL_LIB.component_package.dl074d;
 use TTL_LIB.component_package.dl093d;
 use TTL_LIB.component_package.dl193d;
+use TTL_LIB.component_package.dl253d;
+use TTL_LIB.component_package.U2164D;
 
 
 entity kc85_4 is
@@ -164,6 +166,13 @@ architecture rtl of kc85_4 is
     signal  block0      : std_logic;
     signal  bla1_big    : std_logic;
     signal  bla1        : std_logic;
+    --
+    signal  s0          : std_logic;
+    signal  s1          : std_logic;
+    signal  d3409_s     : std_logic_vector( 1 downto 0);
+    signal  a_big       : std_logic_vector( 7 downto 0);
+    signal  bild        : std_logic;
+    signal  d_big       : std_logic_vector( 7 downto 0);
     --
     signal  afe         : std_logic;
     signal  meo         : std_logic;
@@ -523,5 +532,210 @@ begin
 
 
     -- Ende Spalte 2
+
+    -- Anfang Spalte 3
+    d3409_s <= not s1 & s0;
+    D3409: dl253d
+    port map
+    (
+        d1       => v( 0) & v( 2) & ab_small( 0) & ab_small( 2),    --: in  std_ulogic_vector(3 downto 0);
+        d2       => v( 1) & v( 3) & ab_small( 1) & ab_small( 3),    --: in  std_ulogic_vector(3 downto 0);
+        --       
+        s        => d3409_s,                                        --: in  std_ulogic_vector(1 downto 0);
+        oe1_n    => '0',                                            --: in  std_ulogic;
+        oe2_n    => '0',                                            --: in  std_ulogic;
+        --       
+        y1       => A_big( 0),                                      --: out std_ulogic;
+        y2       => A_big( 1)                                       --: out std_ulogic
+    );
+    
+    D3410: dl253d
+    port map
+    (
+        d1       => h( 0) & v( 4) & ab_small( 8) & ab_small( 4),    --: in  std_ulogic_vector(3 downto 0);
+        d2       => h( 1) & v( 5) & ab_small( 9) & ab_small( 5),    --: in  std_ulogic_vector(3 downto 0);
+        --       
+        s        => d3409_s,                                        --: in  std_ulogic_vector(1 downto 0);
+        oe1_n    => '0',                                            --: in  std_ulogic;
+        oe2_n    => '0',                                            --: in  std_ulogic;
+        --       
+        y1       => A_big( 2),                                      --: out std_ulogic;
+        y2       => A_big( 3)                                       --: out std_ulogic
+    );
+    
+    D3413: U2164D
+    generic map
+    (
+        seed1  =>   5,                  --: positive := 3;
+        seed2  =>   6                   --: positive := 4
+    )
+    port map
+    (
+        a      => A_big( 7 downto 0),   --: in    std_logic_vector(7 downto 0);
+        ras_n  => ras_n,                --: in    std_logic;
+        cas_n  => cas_n,                --: in    std_logic;
+        wr_n   => write_n,              --: in    std_logic;
+        di     => db( 0),               --: in    std_logic;
+        --
+        do     => d_big( 0)             --: out   std_logic
+    );
+   
+
+    D3414: U2164D
+    generic map
+    (
+        seed1  =>   7,                  --: positive := 3;
+        seed2  =>   8                   --: positive := 4
+    )
+    port map
+    (
+        a      => A_big( 7 downto 0),   --: in    std_logic_vector(7 downto 0);
+        ras_n  => ras_n,                --: in    std_logic;
+        cas_n  => cas_n,                --: in    std_logic;
+        wr_n   => write_n,              --: in    std_logic;
+        di     => db( 1),               --: in    std_logic;
+        --
+        do     => d_big( 1)             --: out   std_logic
+    );
+   
+
+    D3415: U2164D
+    generic map
+    (
+        seed1  =>   9,                  --: positive := 3;
+        seed2  =>   10                  --: positive := 4
+    )
+    port map
+    (
+        a      => A_big( 7 downto 0),   --: in    std_logic_vector(7 downto 0);
+        ras_n  => ras_n,                --: in    std_logic;
+        cas_n  => cas_n,                --: in    std_logic;
+        wr_n   => write_n,              --: in    std_logic;
+        di     => db( 2),               --: in    std_logic;
+        --
+        do     => d_big( 2)             --: out   std_logic
+    );
+   
+
+    D3416: U2164D
+    generic map
+    (
+        seed1  =>   11,                 --: positive := 3;
+        seed2  =>   12                  --: positive := 4
+    )
+    port map
+    (
+        a      => A_big( 7 downto 0),   --: in    std_logic_vector(7 downto 0);
+        ras_n  => ras_n,                --: in    std_logic;
+        cas_n  => cas_n,                --: in    std_logic;
+        wr_n   => write_n,              --: in    std_logic;
+        di     => db( 3),               --: in    std_logic;
+        --
+        do     => d_big( 3)             --: out   std_logic
+    );
+    -- Ende Spalte 3
+
+    
+    -- Anfang Spalte 4
+    D3411: dl253d
+    port map
+    (
+        d1       => h( 2) & v( 6) & ab_small( 10) & ab_small( 6),   --: in  std_ulogic_vector(3 downto 0);
+        d2       => h( 3) & v( 7) & ab_small( 11) & ab_small( 7),   --: in  std_ulogic_vector(3 downto 0);
+        --       
+        s        => d3409_s,                                        --: in  std_ulogic_vector(1 downto 0);
+        oe1_n    => '0',                                            --: in  std_ulogic;
+        oe2_n    => '0',                                            --: in  std_ulogic;
+        --       
+        y1       => A_big( 4),                                      --: out std_ulogic;
+        y2       => A_big( 5)                                       --: out std_ulogic
+    );
+    
+    D3412: dl253d
+    port map
+    (
+        d1       => h( 4) & s2    & ab_small( 12) & bla0,           --: in  std_ulogic_vector(3 downto 0);
+        d2       => h( 5) & bild  & ab_small( 13) & bla1,            --: in  std_ulogic_vector(3 downto 0);
+        --       
+        s        => d3409_s,                                        --: in  std_ulogic_vector(1 downto 0);
+        oe1_n    => '0',                                            --: in  std_ulogic;
+        oe2_n    => '0',                                            --: in  std_ulogic;
+        --       
+        y1       => A_big( 6),                                      --: out std_ulogic;
+        y2       => A_big( 7)                                       --: out std_ulogic
+    );
+   
+
+    D3417: U2164D
+    generic map
+    (
+        seed1  =>   13,                 --: positive := 3;
+        seed2  =>   14                  --: positive := 4
+    )
+    port map
+    (
+        a      => A_big( 7 downto 0),   --: in    std_logic_vector(7 downto 0);
+        ras_n  => ras_n,                --: in    std_logic;
+        cas_n  => cas_n,                --: in    std_logic;
+        wr_n   => write_n,              --: in    std_logic;
+        di     => db( 4),               --: in    std_logic;
+        --
+        do     => d_big( 4)             --: out   std_logic
+    );
+   
+
+    D3418: U2164D
+    generic map
+    (
+        seed1  =>   15,                 --: positive := 3;
+        seed2  =>   16                  --: positive := 4
+    )
+    port map
+    (
+        a      => A_big( 7 downto 0),   --: in    std_logic_vector(7 downto 0);
+        ras_n  => ras_n,                --: in    std_logic;
+        cas_n  => cas_n,                --: in    std_logic;
+        wr_n   => write_n,              --: in    std_logic;
+        di     => db( 5),               --: in    std_logic;
+        --
+        do     => d_big( 5)             --: out   std_logic
+    );
+   
+
+    D3419: U2164D
+    generic map
+    (
+        seed1  =>   17,                 --: positive := 3;
+        seed2  =>   18                  --: positive := 4
+    )
+    port map
+    (
+        a      => A_big( 7 downto 0),   --: in    std_logic_vector(7 downto 0);
+        ras_n  => ras_n,                --: in    std_logic;
+        cas_n  => cas_n,                --: in    std_logic;
+        wr_n   => write_n,              --: in    std_logic;
+        di     => db( 6),               --: in    std_logic;
+        --
+        do     => d_big( 6)             --: out   std_logic
+    );
+   
+
+    D3420: U2164D
+    generic map
+    (
+        seed1  =>   19,                 --: positive := 3;
+        seed2  =>   20                  --: positive := 4
+    )
+    port map
+    (
+        a      => A_big( 7 downto 0),   --: in    std_logic_vector(7 downto 0);
+        ras_n  => ras_n,                --: in    std_logic;
+        cas_n  => cas_n,                --: in    std_logic;
+        wr_n   => write_n,              --: in    std_logic;
+        di     => db( 7),               --: in    std_logic;
+        --
+        do     => d_big( 7)             --: out   std_logic
+    );
+    -- Ende Spalte 4
 
 end architecture rtl;

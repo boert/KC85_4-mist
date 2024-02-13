@@ -3,12 +3,14 @@
 #
 # TTL library
 ttl_lib contrib/ttl_lib/component_package.vhd
-ttl_lib contrib/ttl_lib/dl000d.vhd
-ttl_lib contrib/ttl_lib/dl008d.vhd
-ttl_lib contrib/ttl_lib/dl074d.vhd
-ttl_lib contrib/ttl_lib/dl090d.vhd
-ttl_lib contrib/ttl_lib/dl093d.vhd
-ttl_lib contrib/ttl_lib/dl193d.vhd
+ttl_lib contrib/ttl_lib/DL000D.vhd
+ttl_lib contrib/ttl_lib/DL008D.vhd
+ttl_lib contrib/ttl_lib/DL074D.vhd
+ttl_lib contrib/ttl_lib/DL090D.vhd
+ttl_lib contrib/ttl_lib/DL093D.vhd
+ttl_lib contrib/ttl_lib/DL193D.vhd
+ttl_lib contrib/ttl_lib/DL253D.vhd
+ttl_lib contrib/ttl_lib/U2164D.vhd
 #
 # Z80
 T80 contrib/T80/T80_Pack.vhd

@@ -230,6 +230,22 @@ package component_package is
     end component dl251d;
 
 
+    component dl253d is
+    port 
+    (
+        d1       : in  std_ulogic_vector(3 downto 0);
+        d2       : in  std_ulogic_vector(3 downto 0);
+        --       
+        s        : in  std_ulogic_vector(1 downto 0);
+        oe1_n    : in  std_ulogic;
+        oe2_n    : in  std_ulogic;
+        --       
+        y1       : out std_ulogic;
+        y2       : out std_ulogic
+    );
+    end component dl253d;
+
+
     component dl347d is
         port (
             di   : in  std_ulogic_vector(7 downto 0);
@@ -284,6 +300,23 @@ package component_package is
             do     : out   std_logic
         );
     end component u256;
+
+
+    component U2164D is
+    generic (
+        seed1  : positive := 3;
+        seed2  : positive := 4
+    );
+    port (
+        a      : in    std_logic_vector(7 downto 0);
+        ras_n  : in    std_logic;
+        cas_n  : in    std_logic;
+        wr_n   : in    std_logic;
+        di     : in    std_logic;
+        --
+        do     : out   std_logic
+    );
+    end component U2164D;
 
 
     component u880 is

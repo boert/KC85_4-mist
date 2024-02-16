@@ -230,7 +230,7 @@ package component_package is
     end component dl251d;
 
 
-    component dl253d is
+    component DL253D is
     port 
     (
         d1       : in  std_ulogic_vector(3 downto 0);
@@ -243,18 +243,41 @@ package component_package is
         y1       : out std_ulogic;
         y2       : out std_ulogic
     );
-    end component dl253d;
+    end component DL253D;
 
 
-    component dl347d is
-        port (
-            di   : in  std_ulogic_vector(7 downto 0);
-            clk  : in  std_ulogic;
-            oe_n : in  std_ulogic;
-            --
-            do   : out std_ulogic_vector(7 downto 0)
-        );
-    end component dl347d;
+    component DL299D is
+    port 
+    (
+        s0      : in    std_ulogic;
+        s1      : in    std_ulogic;
+        --
+        sl      : in    std_ulogic;
+        sr      : in    std_ulogic;
+        --
+        clk     : in    std_ulogic;
+        clr_n   : in    std_ulogic;
+        oe1_n   : in    std_ulogic;
+        oe2_n   : in    std_ulogic;
+        --
+        d       : inout std_ulogic_vector(7 downto 0);
+        --
+        oa      : out   std_ulogic;
+        oh      : out   std_ulogic
+    );
+    end component DL299D;
+
+
+    component DL374D is
+    port 
+    (
+        di   : in  std_ulogic_vector(7 downto 0);
+        clk  : in  std_ulogic;
+        oe_n : in  std_ulogic;
+        --
+        do   : out std_ulogic_vector(7 downto 0)
+    );
+    end component DL374D;
 
 
     component d172d is

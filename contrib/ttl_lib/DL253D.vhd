@@ -5,7 +5,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity dl253d is
+entity DL253D is
 port 
 (
     d1       : in  std_ulogic_vector(3 downto 0);
@@ -18,10 +18,10 @@ port
     y1       : out std_ulogic;
     y2       : out std_ulogic
 );
-end entity dl253d;
+end entity DL253D;
 
 
-architecture rtl of dl253d is
+architecture rtl of DL253D is
     
 begin
 

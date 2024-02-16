@@ -19,7 +19,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-TARGET=top_mist_tb
+TARGET=top_kc85_4_tb
 
 
 LIBS = $(shell grep --invert "^#" ../vhdl_files.txt | cut --field=1 --delimiter=" " | sort | uniq)

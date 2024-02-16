@@ -201,7 +201,7 @@ package component_package is
     end component dl123;
 
 
-    component dl193d is
+    component DL193D is
     port 
     (
         d   : in  std_ulogic_vector(3 downto 0);
@@ -214,7 +214,7 @@ package component_package is
         cv  : out std_ulogic;
         cr  : out std_ulogic
     );
-    end component dl193d;
+    end component DL193D;
 
 
     component dl251d is

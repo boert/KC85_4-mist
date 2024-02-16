@@ -56,7 +56,9 @@ library TTL_LIB;
 use TTL_LIB.component_package.dl074d;
 use TTL_LIB.component_package.dl093d;
 use TTL_LIB.component_package.dl193d;
-use TTL_LIB.component_package.dl253d;
+use TTL_LIB.component_package.DL253D;
+use TTL_LIB.component_package.DL299D;
+use TTL_LIB.component_package.DL374D;
 use TTL_LIB.component_package.U2164D;
 
 
@@ -173,6 +175,26 @@ architecture rtl of kc85_4 is
     signal  a_big       : std_logic_vector( 7 downto 0);
     signal  bild        : std_logic;
     signal  d_big       : std_logic_vector( 7 downto 0);
+    signal  dp_big      : std_logic_vector( 7 downto 0);
+    signal  df_big      : std_logic_vector( 7 downto 0);
+    signal  d3428c_q    : std_logic;
+    signal  d3440a_q    : std_logic;
+    signal  blen        : std_logic;
+    signal  d3440c_q    : std_logic;
+    signal  bon         : std_logic;
+    signal  ez_n        : std_logic;
+    signal  hell_n      : std_logic;
+    signal  ez          : std_logic;
+    signal  hell        : std_logic;
+    signal  ey          : std_logic;
+    signal  ex_n        : std_logic;
+    signal  er          : std_logic;
+    signal  eg          : std_logic;
+    signal  eb          : std_logic;
+    signal  er_n        : std_logic;
+    signal  eg_n        : std_logic;
+    signal  eb_n        : std_logic;
+    signal  fpix        : std_logic;
     --
     signal  afe         : std_logic;
     signal  meo         : std_logic;
@@ -737,5 +759,131 @@ begin
         do     => d_big( 7)             --: out   std_logic
     );
     -- Ende Spalte 4
+    
+
+    -- Anfang Spalte 5
+    -- Latch für Prozessor
+    D3421: DL374D
+    port map
+    (
+        di   => D_big,                  --: in  std_ulogic_vector(7 downto 0);
+        clk  => dup,                    --: in  std_ulogic;
+        oe_n => oed_n,                  --: in  std_ulogic;
+        --
+        do   => db                      --: out std_ulogic_vector(7 downto 0)
+    );
+    
+
+    -- Latch für Pixel
+    D3422: DL374D
+    port map
+    (
+        di   => D_big,                  --: in  std_ulogic_vector(7 downto 0);
+        clk  => duz,                    --: in  std_ulogic;
+        oe_n => '0',                    --: in  std_ulogic;
+        --
+        do   => dp_big                  --: out std_ulogic_vector(7 downto 0)
+    );
+    
+
+    -- Latch für Farbe
+    D3423: DL374D
+    port map
+    (
+        di   => D_big,                  --: in  std_ulogic_vector(7 downto 0);
+        clk  => d3428c_q,               --: in  std_ulogic;
+        oe_n => '0',                    --: in  std_ulogic;
+        --
+        do   => df_big                  --: out std_ulogic_vector(7 downto 0)
+    );
+
+    D3428C: d3428c_q    <= m( 0) and duf;
+    R3404:  df_big( 0)  <= 'L'; -- pull down
+    R3405:  df_big( 1)  <= 'L'; -- pull down
+    R3406:  df_big( 2)  <= 'L'; -- pull down
+
+    D3440A: d3440a_q    <= not( df_big( 7) and blink and blen);
+    D3440C: d3440c_q    <= not( bon and d3440a_q);
+    D3430D: ez_n        <= d3440c_q and hell_n;
+    R3407:  hell_n      <= 'H'; -- pull up
+    D3441E: ez          <= not ez_n;
+    D3439D: hell        <= not hell_n;
+
+    -- Ende Spalte 5
+    
+
+    -- Anfang Spalte 6
+    D3424: DL299D
+    port map
+    (
+        s0      => '1',                 --: in    std_ulogic;
+        s1      => duf,                 --: in    std_ulogic;
+        --
+        sl      => '0',                 --: in    std_ulogic;
+        sr      => '0',                 --: in    std_ulogic;
+        --
+        clk     => m( 0),               --: in    std_ulogic;
+        clr_n   => inf,                 --: in    std_ulogic;
+        oe1_n   => '1',                 --: in    std_ulogic;
+        oe2_n   => '1',                 --: in    std_ulogic;
+        --
+        d       => dp_big,              --: inout std_ulogic_vector(7 downto 0);
+        --
+        oa      => bon,                 --: out   std_ulogic;
+        oh      => open                 --: out   std_ulogic
+    );
+    
+    D3425: DL253D
+    port map
+    (
+        d1       => df_big( 3) & df_big( 0) & ey  & ey,
+        d2       => df_big( 4) & df_big( 1) & '1' & '0',
+        --       
+        s        => fpix & ez,                                      --: in  std_ulogic_vector(1 downto 0);
+        oe1_n    => hell,                                           --: in  std_ulogic;
+        oe2_n    => hell,                                           --: in  std_ulogic;
+        --       
+        y1       => eb,                                             --: out std_ulogic;
+        y2       => er                                              --: out std_ulogic
+    );
+    D3441A: eb_n    <= eb;
+    D3441B: er_n    <= er;
+    D3441C: eg_n    <= eg;
+    
+    D3426: DL253D
+    port map
+    (
+        d1       => df_big( 5) & df_big( 2) & ey  & ey,
+        d2       => df_big( 6) & '1'    & '0' & '0',
+        --       
+        s        => fpix & ez,                                      --: in  std_ulogic_vector(1 downto 0);
+        oe1_n    => hell,                                           --: in  std_ulogic;
+        oe2_n    => hell,                                           --: in  std_ulogic;
+        --       
+        y1       => eg,                                             --: out std_ulogic;
+        y2       => ex_n                                            --: out std_ulogic
+    );
+
+    D3427: DL299D
+    port map
+    (
+        s0      => '1',                 --: in    std_ulogic;
+        s1      => duf,                 --: in    std_ulogic;
+        --
+        sl      => '0',                 --: in    std_ulogic;
+        sr      => '0',                 --: in    std_ulogic;
+        --
+        clk     => m( 0),               --: in    std_ulogic;
+        clr_n   => inf,                 --: in    std_ulogic;
+        oe1_n   => '1',                 --: in    std_ulogic;
+        oe2_n   => '1',                 --: in    std_ulogic;
+        --
+        d       => d_big,               --: inout std_ulogic_vector(7 downto 0);
+        --
+        oa      => open,                --: out   std_ulogic;
+        oh      => ey                   --: out   std_ulogic
+    );
+
+    -- Ende Spalte 6
 
 end architecture rtl;

@@ -10,6 +10,8 @@ ttl_lib contrib/ttl_lib/DL090D.vhd
 ttl_lib contrib/ttl_lib/DL093D.vhd
 ttl_lib contrib/ttl_lib/DL193D.vhd
 ttl_lib contrib/ttl_lib/DL253D.vhd
+ttl_lib contrib/ttl_lib/DL299D.vhd
+ttl_lib contrib/ttl_lib/DL374D.vhd
 ttl_lib contrib/ttl_lib/U2164D.vhd
 #
 # Z80

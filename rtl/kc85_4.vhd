@@ -55,7 +55,7 @@ library T80;
 library TTL_LIB;
 use TTL_LIB.component_package.dl074d;
 use TTL_LIB.component_package.dl093d;
-use TTL_LIB.component_package.dl193d;
+use TTL_LIB.component_package.DL193D;
 use TTL_LIB.component_package.DL253D;
 use TTL_LIB.component_package.DL299D;
 use TTL_LIB.component_package.DL374D;
@@ -348,7 +348,7 @@ begin
     -- Anfang Spalte 1
     D3432: vcot_n  <= not vcot;
 
-    D3401: dl193d
+    D3401: DL193D
     port map
     (
         zv      => vcot_n,      --: in  std_ulogic;
@@ -364,7 +364,7 @@ begin
         cr      => open         --: out std_ulogic;
     );
 
-    D3402: dl193d
+    D3402: DL193D
     port map
     (
         zv      => d3401_uv_n,  --: in  std_ulogic;
@@ -449,9 +449,9 @@ begin
     v( 7)   <= d3406_q( 2);
     bi_n    <= d3406_q( 3);
 
-    D3428A: d3428a_q    <= pm( 3) and m( 1);
-    D3207A: d3207a_q    <= h( 5) and h( 4) and h( 3);
-    D3428B: hzr         <= d3428a_q and d3207a_q;
+    D3428A: d3428a_q    <= pm( 3) and m( 1)          after 20 ns;
+    D3207A: d3207a_q    <= h( 5) and h( 4) and h( 3) after 20 ns;
+    D3428B: hzr         <= d3428a_q and d3207a_q     after 20 ns;
 
     D3431A: vzr         <= bi_n and v( 4) and v( 3) and v( 5);
 

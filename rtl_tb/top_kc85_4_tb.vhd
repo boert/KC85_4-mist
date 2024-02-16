@@ -44,7 +44,7 @@ begin
 
 
     process
-        constant simulation_time    : time  := 1 ms;
+        constant simulation_time    : time  := 10 ms;
         constant simulation_step    : time  := simulation_time / 5;
     begin
         report "Simulation start.";

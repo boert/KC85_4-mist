@@ -44,17 +44,19 @@ begin
 
 
     process
+        constant simulation_time    : time  := 1 ms;
+        constant simulation_step    : time  := simulation_time / 5;
     begin
         report "Simulation start.";
-        wait for 10 ms;
+        wait for simulation_step;
         report "20% done.";
-        wait for 10 ms;
+        wait for simulation_step;
         report "40% done.";
-        wait for 10 ms;
+        wait for simulation_step;
         report "60% done.";
-        wait for 10 ms;
+        wait for simulation_step;
         report "80% done.";
-        wait for 10 ms;
+        wait for simulation_step;
         report "Simulation end.";
         simulation_run  <= false;
         wait;   -- forever
